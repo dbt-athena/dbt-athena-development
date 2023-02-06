@@ -1,2 +1,2 @@
-# dbt-athena-tester
-A test setup for dbt-athena functionality
+# dbt-athena-development
+A repo containing some basic models to get started with dbt-athena.
