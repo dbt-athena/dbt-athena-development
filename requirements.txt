@@ -1,1 +1,1 @@
-git+https://github.com/dbt-athena/dbt-athena@feat-glue-api-metadata#egg=dbt-athena-community
+git+https://github.com/dbt-athena/dbt-athena@main#egg=dbt-athena-community
