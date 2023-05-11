@@ -1,1 +1,1 @@
-git+https://github.com/dbt-athena/dbt-athena@main#egg=dbt-athena-community
+git+https://github.com/dbt-athena/dbt-athena@chore-dbt-1.5-support#egg=dbt-athena-community

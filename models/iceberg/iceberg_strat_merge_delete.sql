@@ -3,7 +3,7 @@
   incremental_strategy='merge',
   partitioned_by=['hour(test_timestamp)'],
   unique_key='test_timestamp',
-  delete_condition="src.rnd = 0 and target.test_timestamp < now() - interval '2' year",
+  delete_condition="src.test_rnd = 4 and target.test_timestamp < now() - interval '2' year",
   table_type='iceberg',
   format='orc',
 ) }}
@@ -15,6 +15,7 @@ SELECT
     , cast('a' as varchar(1)) as test_fixed_varchar
     , true AS test_bool
     , 123 AS test_int
+    , cast(random() * 10 as int) AS test_rnd
     , cast(123.45 as real) AS test_float
     , CAST(1234.567 AS DECIMAL(7, 3)) AS test_decimal
     , CAST(34 AS BIGINT) AS test_bigint
@@ -31,9 +32,6 @@ SELECT
     , MAP(ARRAY['a'], ARRAY[ARRAY['a']]) AS test_map_string_array_string
     , MAP(ARRAY[1], ARRAY['a']) AS test_map_int_string
     , MAP(ARRAY[true], ARRAY['a']) AS test_map_bool_string
-    {% if is_incremental() %}
-    , cast (random() as int) as rnd
-    {% endif %}
 FROM {{ ref('iceberg_data_source') }}
 {% if is_incremental() %}
   -- this filter will only be applied on an incremental run
